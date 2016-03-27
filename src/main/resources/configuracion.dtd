@@ -1,0 +1,14 @@
+<!ELEMENT configuracion (correos|adaptador|database)+>
+    <!ELEMENT correos (correo)+>
+        <!ELEMENT correo (direccion|password|servidor)+>
+            <!ELEMENT direccion (#PCDATA)>
+            <!ELEMENT password (#PCDATA)>
+            <!ELEMENT servidor (#PCDATA)>
+    <!ELEMENT adaptador (seccion)+>
+            <!ELEMENT seccion (#PCDATA)>
+    <!ELEMENT database (dbname|usuariobd|passwordbd|server|port)+>
+            <!ELEMENT dbname (#PCDATA)>
+            <!ELEMENT server (#PCDATA)>
+            <!ELEMENT usuariobd (#PCDATA)>
+            <!ELEMENT port (#PCDATA)>
+            <!ELEMENT passwordbd (#PCDATA)>
