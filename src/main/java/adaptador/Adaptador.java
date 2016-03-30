@@ -7,15 +7,13 @@ import javax.mail.Multipart;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 
-public abstract class Adaptador {
+abstract class Adaptador {
 
-	private DatabaseMysql database;
-
-	public Adaptador() throws AdaptadorException {
+	Adaptador() throws AdaptadorException {
 		init();
 	}
 
-	protected String extraerTexto(Message message) throws IOException, MessagingException {
+	String extraerTexto(Message message) throws IOException, MessagingException {
 		String result = null;
 		if (message instanceof MimeMessage) {
 			MimeMessage m = (MimeMessage) message;
