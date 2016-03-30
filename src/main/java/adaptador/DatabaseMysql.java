@@ -20,7 +20,7 @@ public class DatabaseMysql {
 		try {
 			cpds = new ComboPooledDataSource();
 			cpds.setDriverClass("com.mysql.jdbc.Driver");
-			String connString = "jdbc:mysql://" + cuenta.getServer() + "/" + cuenta.getDatabase(); // + ":" + cuenta.getPort();
+			String connString = "jdbc:mysql://" + cuenta.getServer() + "/" + cuenta.getDatabase() ;
 			ProcesadorCorreos.getLogger().info(connString);
 			cpds.setJdbcUrl(connString);
 			cpds.setUser(cuenta.getUsuario());
