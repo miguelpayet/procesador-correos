@@ -11,7 +11,6 @@ public class LectorCorreos {
 
 	private AdaptadorSymphony adaptador;
 	private CuentaCorreo cuenta;
-	private Session session;
 	private Store store;
 
 	public LectorCorreos(CuentaCorreo cta, AdaptadorSymphony adapter) {
@@ -19,7 +18,7 @@ public class LectorCorreos {
 		this.adaptador = adapter;
 	}
 
-	public Folder abrirInbox() throws LectorException {
+	private Folder abrirInbox() throws LectorException {
 		Folder folder;
 		try {
 			folder = store.getFolder("inbox");
@@ -32,7 +31,7 @@ public class LectorCorreos {
 		return folder;
 	}
 
-	public void cerrarFolder(Folder folder) throws LectorException {
+	private void cerrarFolder(Folder folder) throws LectorException {
 		try {
 			if (folder.isOpen()) {
 				folder.close(false);
@@ -42,7 +41,7 @@ public class LectorCorreos {
 		}
 	}
 
-	public void conectar() throws LectorException {
+	private void conectar() throws LectorException {
 		ProcesadorCorreos.getLogger().info("conectando");
 		try {
 			store.connect(cuenta.getServidor(), cuenta.getDireccion(), cuenta.getPassword());
@@ -51,7 +50,7 @@ public class LectorCorreos {
 		}
 	}
 
-	public void desconectar() throws LectorException {
+	private void desconectar() throws LectorException {
 		ProcesadorCorreos.getLogger().info("desconectando");
 		try {
 			store.close();
@@ -60,7 +59,7 @@ public class LectorCorreos {
 		}
 	}
 
-	public void leerFolder(Folder folder) throws LectorException {
+	private void leerFolder(Folder folder) throws LectorException {
 		try {
 			int totalMensajes = folder.getMessageCount();
 			ProcesadorCorreos.getLogger().info("mensajes en inbox: " + totalMensajes);
@@ -68,9 +67,7 @@ public class LectorCorreos {
 				Message msg = folder.getMessage(i);
 				adaptador.grabarCorreo(msg);
 			}
-		} catch (MessagingException e) {
-			throw new LectorException(e.getMessage(), e);
-		} catch (AdaptadorException e) {
+		} catch (MessagingException | AdaptadorException e) {
 			throw new LectorException(e.getMessage(), e);
 		}
 	}
@@ -87,11 +84,11 @@ public class LectorCorreos {
 		}
 	}
 
-	public void setup() throws LectorException {
+	private void setup() throws LectorException {
 		try {
 			Properties props = System.getProperties();
 			props.setProperty("mail.store.protocol", "imaps");
-			session = Session.getDefaultInstance(props, null);
+			Session session = Session.getDefaultInstance(props, null);
 			store = session.getStore("imaps");
 		} catch (NoSuchProviderException e) {
 			throw new LectorException(e.getMessage(), e);
