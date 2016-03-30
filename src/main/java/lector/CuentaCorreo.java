@@ -2,9 +2,9 @@ package lector;
 
 public class CuentaCorreo {
 
-	String direccion;
-	String password;
-	String servidor;
+	private String direccion;
+	private String password;
+	private String servidor;
 
 	public CuentaCorreo(String direc, String passw, String servi) {
 		this.direccion = direc;
@@ -12,15 +12,15 @@ public class CuentaCorreo {
 		this.servidor = servi;
 	}
 
-	public String getDireccion() {
+	String getDireccion() {
 		return direccion;
 	}
 
-	public String getPassword() {
+	String getPassword() {
 		return password;
 	}
 
-	public String getServidor() {
+	String getServidor() {
 		return servidor;
 	}
 
@@ -31,14 +31,17 @@ public class CuentaCorreo {
 		System.out.println("servidor: " + servidor);
 	}
 
+	@SuppressWarnings("unused")
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
 
+	@SuppressWarnings("unused")
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	@SuppressWarnings("unused")
 	public void setServidor(String servidor) {
 		this.servidor = servidor;
 	}
