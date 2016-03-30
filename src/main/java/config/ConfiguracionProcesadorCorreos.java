@@ -39,6 +39,7 @@ public class ConfiguracionProcesadorCorreos {
 		try {
 			adaptador = new AdaptadorSymphony();
 			adaptador.setSeccion(config.getString("adaptador.seccion"));
+			adaptador.initSymphonySection();
 		} catch (AdaptadorException e) {
 			throw new ConfiguracionException(e.getMessage(), e);
 		}
